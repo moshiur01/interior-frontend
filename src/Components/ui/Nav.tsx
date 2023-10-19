@@ -85,8 +85,8 @@ const Navbar = () => {
             </Link>
           </div>
 
-          <div className="uppercase justify-around hidden lg:flex">
-            <Link href="/home" className="hover:text-[#dbb479] duration-300">
+          <div className="uppercase justify-around hidden lg:flex lg:items-center">
+            <Link href="/" className="hover:text-[#dbb479] duration-300">
               Home
             </Link>
             <Link href="/home" className="hover:text-[#dbb479] duration-300">
@@ -100,6 +100,12 @@ const Navbar = () => {
             </Link> */}
             <Link href="/home" className="hover:text-[#dbb479] duration-300">
               Contact Us
+            </Link>
+
+            <Link href="/login">
+              <button className="btn btn-xs sm:btn-sm md:btn-md lg:btn-sm">
+                Login
+              </button>
             </Link>
           </div>
 
@@ -167,6 +173,9 @@ const Navbar = () => {
                     className="hover:text-[#dbb479] duration-300"
                   >
                     Contuct Us
+                  </Link>
+                  <Link href="/login">
+                    <button className="btn  btn-sm ">Login</button>
                   </Link>
                 </div>
               </div>
