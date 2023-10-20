@@ -1,8 +1,25 @@
 '"use client";';
+import { getUserInfo, removeUserInfo } from "@/service/auth.service";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React from "react";
 
+import avatar from "../../assests/avatar.png";
+import Image from "next/image";
+import { authKey } from "@/constrain/storagekey";
+
 const Navbar = () => {
+  const router = useRouter();
+
+  // const role = USER_ROLE.ADMIN;
+  const { name } = getUserInfo() as any;
+
+  //  logout function
+  const logOut = () => {
+    removeUserInfo(authKey);
+    router.push("/login");
+  };
+
   return (
     <header>
       {/* Top Header */}
@@ -89,24 +106,58 @@ const Navbar = () => {
             <Link href="/" className="hover:text-[#dbb479] duration-300">
               Home
             </Link>
-            <Link href="/home" className="hover:text-[#dbb479] duration-300">
+            <Link href="/" className="hover:text-[#dbb479] duration-300">
               About Us
             </Link>
-            <Link href="/home" className="hover:text-[#dbb479] duration-300">
+            <Link href="/" className="hover:text-[#dbb479] duration-300">
               Service
             </Link>
             {/* <Link href="/home" className="hover:text-[#dbb479] duration-300">
               Pages
             </Link> */}
-            <Link href="/home" className="hover:text-[#dbb479] duration-300">
+            <Link
+              href="/#contact"
+              className="hover:text-[#dbb479] duration-300"
+            >
               Contact Us
             </Link>
 
-            <Link href="/login">
-              <button className="btn btn-xs sm:btn-sm md:btn-md lg:btn-sm">
-                Login
-              </button>
-            </Link>
+            {name ? (
+              <>
+                <div className="dropdown dropdown-end">
+                  <label
+                    tabIndex={0}
+                    className="btn btn-ghost btn-circle avatar"
+                  >
+                    <div className="w-10 rounded-full">
+                      <Image src={avatar} alt="user image"></Image>
+                    </div>
+                  </label>
+                  <ul
+                    tabIndex={0}
+                    className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 text-black"
+                  >
+                    <li>
+                      <a className="justify-between">{name}</a>
+                    </li>
+                    <li>
+                      <a>Settings</a>
+                    </li>
+                    <li>
+                      <a onClick={logOut}>Logout</a>
+                    </li>
+                  </ul>
+                </div>
+              </>
+            ) : (
+              <>
+                <Link href="/login">
+                  <button className="btn btn-xs sm:btn-sm md:btn-md lg:btn-sm">
+                    Login
+                  </button>
+                </Link>
+              </>
+            )}
           </div>
 
           <div className="lg:hidden flex items-center">
